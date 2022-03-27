@@ -34,5 +34,35 @@ text = tkinter.Text(width=40,height=5,font=("Times New Roman",16))
 #テキストの入力欄を配置
 text.place(x=320,y=30)
 
+"""
+BooleanVarのオブジェクト用のリスト
+チェックボタン用のリスト
+チェックボタンの質問を定義
+"""
+bvar = [None]*7
+cbtn = [None]*7
+ITEM =[
+    "高いところが好き",
+    "ボールを見ると転がしたくなる",
+    "びっくりすると髪の毛が逆立つ",
+    "ネズミの玩具が気になる",
+    "匂いに敏感",
+    "魚の骨をしゃぶりたくなる",
+    "夜、元気になる"
+]
+
+"""
+繰り返しでチェックボタンを配置
+BooleanVarのオブジェクトを作る
+そのオブジェクトにFalseを設定
+チェックボタンの部品をつくる
+"""
+for i in range(7):
+    bvar[i] = tkinter.BooleanVar()
+    bvar[i].set(False)
+    cbtn[i] = tkinter.Checkbutton(text=ITEM[i],font=("Times New Roman",12),variable=bvar[i],bg="#dfe")
+    cbtn[i].place(x=400,y=160+40*i)
+
+
 #ウィンドウを表示
 root.mainloop()
