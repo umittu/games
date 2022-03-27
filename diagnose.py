@@ -1,6 +1,21 @@
 #モジュールのインポート
 import tkinter
 
+"""
+ボタンをクリックしたときに動く関数を定義
+チェックしたボタンを数える変数
+繰り返し命令でチェックされていたら変数の値を１増やし
+入力欄の文字列を削除する
+入力らに変数の値を挿入
+"""
+def click_btn():
+    pts = 0
+    for i in range(7):
+        if bvar[i].get() == True:
+            pts = pts + 1
+    text.delete("1.0",tkinter.END)
+    text.insert("1.0","チェック数は"+str(pts))
+
 #ウィンドウのオブジェクトをつくる
 root = tkinter.Tk()
 
@@ -23,7 +38,7 @@ gazou = tkinter.PhotoImage(file="sumire.png")
 canvas.create_image(400,300,image=gazou)
 
 #ボタンの部品をつくる
-button = tkinter.Button(text="診断する",font=("Times New Roman",32),bg="lightgreen")
+button = tkinter.Button(text="診断する",font=("Times New Roman",32),bg="lightgreen",command=click_btn)
 
 #ボタンを配置
 button.place(x=400,y=480)
