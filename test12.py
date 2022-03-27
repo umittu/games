@@ -2,14 +2,14 @@
 import tkinter
 
 #キーコードを入れる変数の宣言
-key = 0
+key = ""
 
 #キーを押した時に実行する函数の定義
 def key_down(e):
     #keyをグローバルで扱うと宣言
     global key 
-    #押されたキーのコードをkeyに代入
-    key = e.keycode
+    #押されたキーの名称をkeyに代入
+    key = e.keysym
 
 #リアルタイム処理を行う函数を定義
 def main_proc():
