@@ -45,7 +45,7 @@ def game_main():
         cursor_y=int((mouse_y-24)/72)
         if mouse_c==1:
             mouse_c=0
-            neko[cursor_y][cursor_x]=random.randint(1,2)
+            neko[cursor_y][cursor_x]=random.randint(0,7)
     cvs.delete("CURSOR")
     cvs.create_image(cursor_x*72+60,cursor_y*72+60,image=cursor,tag="CURSOR")
     cvs.delete("NEKO")
