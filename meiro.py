@@ -40,6 +40,16 @@ def main_proc():
     #方向キーの左が押されたらx座標を20ドット減らす
     if key == "Left" and maze[my][mx-1] == 0:
         mx = mx - 1
+    #キャラクターのいる場所が通路なら
+    if maze[my][mx] == 0:
+        #リストの値を2にする
+        maze[my][mx] = 2
+        #そこをピンク色に塗る
+        canvas.create_rectangle(mx*80,my*80,mx*80+79,my*80+79,fill="pink",width=0)
+    #一旦キャラクターを消す
+    canvas.delete("MYCHR")
+    #再びキャラクターの画像を表示する
+    canvas.create_image(mx*80+40,my*80+40,image=img,tag="MYCHR")
 
     #キャラクターの画像を新しい位置に移動させる
     canvas.coords("MYCHR",mx*80+40,my*80+40)
@@ -51,7 +61,7 @@ def main_proc():
 root = tkinter.Tk()
 
 #タイトルを指定
-root.title("迷路内を移動する")
+root.title("迷路を塗るにゃん")
 
 #bind()命令でキーを押した時に実行する函数を指定
 root.bind("<KeyPress>",key_down)
