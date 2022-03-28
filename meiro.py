@@ -1,5 +1,6 @@
 #モジュールのインポート
 import tkinter
+import tkinter.messagebox
 
 #キーの値を入れる変数を宣言
 key = ""
@@ -24,10 +25,13 @@ mx = 1
 #キャラクターのy座標を管理する変数
 my = 1
 
+#塗った床を数える函数
+yuka = 0
+
 #リアルタイム処理を行う函数を定義
 def main_proc():
     #cx,cyをグローバル函数で扱うと宣言
-    global mx,my
+    global mx,my,yuka
     #方向キーの上が押されたらy座標を20ドット減らす
     if key == "Up" and maze[my-1][mx] == 0:
         my = my - 1
@@ -44,12 +48,25 @@ def main_proc():
     if maze[my][mx] == 0:
         #リストの値を2にする
         maze[my][mx] = 2
+        #塗った回数を1増やす
+        yuka = yuka + 1
         #そこをピンク色に塗る
         canvas.create_rectangle(mx*80,my*80,mx*80+79,my*80+79,fill="pink",width=0)
     #一旦キャラクターを消す
     canvas.delete("MYCHR")
+
     #再びキャラクターの画像を表示する
     canvas.create_image(mx*80+40,my*80+40,image=img,tag="MYCHR")
+    #30ヶ所の床を塗ったら
+    if yuka == 30:
+        #キャンバスを更新
+        canvas.update()
+        #メッセージを表示
+        tkinter.messagebox.showinfo("おめでとう！","全ての床を塗りました！")
+        #そうでなければ
+    else:
+        #0.3秒後にふたたびこの函数を実行
+        root.after(50,main_proc)
 
     #キャラクターの画像を新しい位置に移動させる
     canvas.coords("MYCHR",mx*80+40,my*80+40)
@@ -79,7 +96,7 @@ canvas.pack()
 maze = [
     [1,1,1,1,1,1,1,1,1,1],
     [1,0,0,0,0,0,1,0,0,1],
-    [1,0,1,1,0,1,1,0,0,1],
+    [1,0,1,1,0,0,1,0,0,1],
     [1,0,0,1,0,0,0,0,0,1],
     [1,0,0,1,1,1,1,1,0,1],
     [1,0,0,0,0,0,0,0,0,1],
