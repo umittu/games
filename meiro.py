@@ -32,6 +32,24 @@ yuka = 0
 def main_proc():
     #cx,cyをグローバル函数で扱うと宣言
     global mx,my,yuka
+    #左Shiftキーを押し、かつ2マス以上塗っていたら
+    if key == "Shift_L" and yuka > 1:
+        #塗った床を消す
+        canvas.delete("PAINT")
+        #mxに1を代入する
+        mx = 1
+        #myに1を代入する
+        my = 1
+        #yukaに0を代入する
+        yuka = 0
+        #二重ループの繰り返し
+        for y in range(7):
+            #内側のfor
+            for x in range(10):
+                #塗った床があれば
+                if maze[y][x] == 2:
+                    #値を0に
+                    maze[y][x] = 0
     #方向キーの上が押されたらy座標を20ドット減らす
     if key == "Up" and maze[my-1][mx] == 0:
         my = my - 1
@@ -51,7 +69,7 @@ def main_proc():
         #塗った回数を1増やす
         yuka = yuka + 1
         #そこをピンク色に塗る
-        canvas.create_rectangle(mx*80,my*80,mx*80+79,my*80+79,fill="pink",width=0)
+        canvas.create_rectangle(mx*80,my*80,mx*80+79,my*80+79,fill="pink",width=0,tag="PAINT")
     #一旦キャラクターを消す
     canvas.delete("MYCHR")
 
